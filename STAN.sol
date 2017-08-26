@@ -246,8 +246,9 @@ contract STANToken is StandardToken, SafeMath {
         require(tokens + tokenRaised <= currentSupply);
 
         tokenRaised = safeAdd(tokenRaised, tokens);
+        require(balances[msg.sender] >= tokens);
         balances[_addr] += tokens;
-
+        balances[msg.sender] -= tokens;
         AllocateToken(_addr, tokens);  // logs token issued
     }
 
